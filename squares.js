@@ -20,6 +20,7 @@ function renderWidgets(filterObj) {
                     numbers[arr[i][0]] = [arr[i].split(",")];
                 }
             }
+            // Res will hold 10 images
             let res = [];
             let controlPanel = {};
             for (let number = 0; number < 10; number++) {
@@ -38,11 +39,15 @@ function renderWidgets(filterObj) {
                     let sum = 0;
                     let rowIdx = 0;
                     while (rowIdx < num.length) {
+                        // builds sum from pixel in the column of the selected images
                         let currPixel = Number(num[rowIdx][colIdx]);
                         sum += currPixel;
                         rowIdx += 1;
                     }
+                    // greyScale calculation
                     let greyScale = (255 * (1 - (sum / num.length)));
+                    // Builds Object for data to pass along for 
+                    // metrics panel
                     controlPanel[number] = {
                         "number": number,
                         "currRowCount": num.length,
@@ -53,19 +58,24 @@ function renderWidgets(filterObj) {
                 }
                 res.push(image);    
             }
+            // removes loader
             const loader = document.getElementsByClassName('loader')[0];
             loader.classList.add('disabled');
+
+            // Loop create widget and pixel children
             for (let i = 0; i < res.length; i++) {
                 const currImage = res[i];
                 let widget = document.createElement('div');
                 widget.classList.add("widget");
                 for (let j = 0; j < currImage.length; j++) {
+                    // set color for pixel
                     let color = Math.floor(currImage[j]);
                     let pixel = document.createElement('div');
                     pixel.classList.add('square');
                     pixel.style.backgroundColor =  'rgb(' + [color,color,color].join(',') + ')';
                     widget.appendChild(pixel);
                 }
+                // adds widget to widget container
                 let container = document.getElementById('widget-container');
                 widget.appendChild(createMetricPanel(controlPanel[i]));
                 container.appendChild(widget);
