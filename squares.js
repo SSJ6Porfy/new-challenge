@@ -21,7 +21,7 @@ function renderWidgets(filterObj) {
                 }
             }
             let res = [];
-
+            let controlPanel = {};
             for (let number = 0; number < 10; number++) {
                 // iterate for each digit
                 // keys into numbers object for 5K of image rows;
@@ -29,7 +29,6 @@ function renderWidgets(filterObj) {
                 let rowLength = num[0].length;
                 let image = [];
                 let colIdx = 1;
-
                 // check if a filterObj has been provided
                 if (filterObj) {
                     num = filterImages(num, filterObj);
@@ -38,14 +37,17 @@ function renderWidgets(filterObj) {
                 while (colIdx < rowLength) {
                     let sum = 0;
                     let rowIdx = 0;
-                    let recordCount = 0;
                     while (rowIdx < num.length) {
                         let currPixel = Number(num[rowIdx][colIdx]);
                         sum += currPixel;
-                        recordCount += 1;
                         rowIdx += 1;
                     }
-                    let greyScale = (255 * (1 - (sum / recordCount)));
+                    let greyScale = (255 * (1 - (sum / num.length)));
+                    controlPanel[number] = {
+                        "number": number,
+                        "currRowCount": num.length,
+                        "TotalRowCount": 5000
+                    };
                     image.push(greyScale);
                     colIdx += 1;
                 }
@@ -65,6 +67,7 @@ function renderWidgets(filterObj) {
                     widget.appendChild(pixel);
                 }
                 let container = document.getElementById('widget-container');
+                widget.appendChild(createMetricPanel(controlPanel[i]));
                 container.appendChild(widget);
             }
         })
@@ -93,6 +96,41 @@ function filterImages(arr, filterObj) {
         }
     });
     return result;
+}
+
+function createMetricPanel(info) {
+    let num = info.number;
+    let currRowCount = info.currRowCount;
+    let TotalRowCount = info.TotalRowCount;
+
+    let rowContainer = document.createElement('div');
+    rowContainer.classList.add('metric-container');
+
+    let numberDiv = document.createElement('div');
+    let currRowDiv = document.createElement('div');
+    let totalRowDiv = document.createElement('div');
+
+    numberDiv.classList.add('metric-data');
+    currRowDiv.classList.add('metric-data');
+    totalRowDiv.classList.add('metric-data');
+
+    let numberDivLabel = document.createElement('p');
+    let currRowDivLabel = document.createElement('p');
+    let totalRowDivLabel = document.createElement('p');
+
+    numberDivLabel.innerHTML = `Number: ${num}`;
+    currRowDivLabel.innerHTML = `Rows Displayed: ${currRowCount}`;
+    totalRowDivLabel.innerHTML = `Total Rows: ${TotalRowCount}`;
+    
+    numberDiv.appendChild(numberDivLabel);
+    currRowDiv.appendChild(currRowDivLabel);
+    totalRowDiv.appendChild(totalRowDivLabel);
+
+    rowContainer.appendChild(numberDiv);
+    rowContainer.appendChild(currRowDiv);
+    rowContainer.appendChild(totalRowDiv);
+
+    return rowContainer;
 }
 
 
