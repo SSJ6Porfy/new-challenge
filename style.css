@@ -3,12 +3,19 @@ html, body {
     height: 100%;
     width: 100%;
     display: block;
+    background: rgb(210, 211, 213);
+}
+
+#title-banner {
+    font-family: sans-serif;
+    font-size: 50px;
+    text-align: center;
 }
 
 #widget-container {
     display: block;
     width: 840px;
-    height: 400px;
+    height: 350px;
     margin: 0 auto;
 }
 
@@ -46,6 +53,8 @@ html, body {
 #control-banner {
     text-align: center;
     font-family: sans-serif;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
 }
 
 #filter-btn {
@@ -62,3 +71,36 @@ html, body {
 #btn-container {
     margin-bottom: 20px;
 }
+
+.instruction-text {
+    font-family: sans-serif;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #474747;
+    width: 220px;
+    height: 220px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .disabled {
+      display: none;
+  }

@@ -51,7 +51,8 @@ function renderWidgets(filterObj) {
                 }
                 res.push(image);    
             }
-
+            const loader = document.getElementsByClassName('loader')[0];
+            loader.classList.add('disabled');
             for (let i = 0; i < res.length; i++) {
                 const currImage = res[i];
                 let widget = document.createElement('div');
@@ -148,11 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // based on the present state of the controller widget
             // then reset the controller widget
             btn.addEventListener('click', () => {
+                const loader = document.getElementsByClassName('loader')[0];
+                loader.classList.remove('disabled');
                 let container = document.getElementById('widget-container');
 
                 // on Submit destory current widgets and re-renders
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
+                while (container.children[1]) {
+                    let child = container.children[1];
+                    container.removeChild(child);
                 }
             
                 renderWidgets(filterObj);
