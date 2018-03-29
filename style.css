@@ -1,0 +1,64 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+#widget-container {
+    display: block;
+    width: 840px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+#control-widget-container {
+    display: block;
+    margin: 30px;
+}
+
+.widget {
+    display: block;
+    width: 100%;
+    width: 160px;
+    height: 160px;
+    float: left;
+    border: 1px solid rgb(66, 66, 66);
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.square {
+    height: 10px;
+    width: 10px;
+    display: block;
+    float: left;
+}
+
+.control-widget {
+    display: block;
+    width: 100%;
+    width: 195px;
+    height: 195px;
+    margin: 0 auto;
+}
+
+#control-banner {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+#filter-btn {
+    height: 40px;
+    width: 140px;
+    color: white;
+    background: darkgray;
+    font-size: 16px;
+    border: 1px solid black;
+    display: block;
+    margin: 0 auto;
+}
+
+#btn-container {
+    margin-bottom: 20px;
+}
